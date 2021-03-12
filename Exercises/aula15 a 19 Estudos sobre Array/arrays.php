@@ -8,6 +8,8 @@ echo "<h1>Estudo sobre arrays</hr>";
 $frutas = array("maçã","banana","mamão", "melão", "abacate"); 
 
 
+
+//ARRAY MULTIDIMENSIONAL
 $produtos = array(
     array(
         "nome"=>"Macarrão 400g", 
@@ -48,6 +50,7 @@ foreach($frutas as $frutas){
     //echo "<br>";
     //echo $frutas;
 }
+
  
 echo "<hr>";
 echo "<h2>Arrays associativos<h2/>";
