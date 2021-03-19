@@ -24,29 +24,39 @@
     
     //Inicia a contagem de tentativas e randomiza um valor
     if(!isset($_SESSION['tentativa'])){
-        $_SESSION['tentativa'] = 1;
+        $_SESSION['tentativa'] = 10;
         $_SESSION['numero'] = rand(1,100);
     }
 
     //verifica se a tentativa é diferente de S
-    if(isset($_POST['entrada'])&& $_POST['entrada'] != 's'){
-        $entrada = $_POST['entrada'];
-        if($entrada == $_SESSION['numero']){
-            echo"Parabéns, você ganhou! O numero sorteado foi <strong>".$_SESSION['numero']."</strong> <br>";
-            echo"O numero de tentativas foi:<strong>".$_SESSION['tentativa']."</strong><br>";
-            echo"Digite S para jogar novamente";
+    if($_SESSION['tentativa'] != 0){
+        if(isset($_POST['entrada'])&& $_POST['entrada'] != 's'){
+            $entrada = $_POST['entrada'];
+            if($entrada == $_SESSION['numero']){
+                echo"Parabéns, você ganhou! O numero sorteado foi <strong>".$_SESSION['numero']."</strong> <br>";
+                echo"O numero de tentativas restantes é de:<strong>".$_SESSION['tentativa']."</strong><br>";
+                echo"Digite S para jogar novamente";
+            }
+            elseif($entrada > $_SESSION['numero']){
+                echo"O numero digitado é muito grande <br/>";
+                $_SESSION['tentativa']--;
+                echo"Tentativas restantes: ".$_SESSION['tentativa'];                
+            }
+            else{
+                echo"O numero digitado é muito pequeno <br/>";
+                $_SESSION['tentativa']--;
+                echo"Tentativas restantes: ".$_SESSION['tentativa']; 
+            }
         }
-        elseif($entrada > $_SESSION['numero']){
-            echo"O numero digitado é muito grande";
+        elseif(isset($_POST['entrada'])&& $_POST['entrada'] == 's'){
+            unset($_SESSION['numero']); session_destroy();
         }
-        else{
-            echo"O numero digitado é muito pequeno";
-        }
-        $_SESSION['tentativa']++;
     }
-    elseif(isset($_POST['entrada'])&& $_POST['entrada'] == 's'){
+    else{
+        echo"O numero de tentativas foi ultrapassado. <br/>VOCÊ PERDEU!";
         unset($_SESSION['numero']); session_destroy();
     }
+
 
 
     
