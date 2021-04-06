@@ -1,0 +1,21 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-style: none;
+}
+
+.container{
+    display: flex;
+    background-color: grey;
+    width: 40vw;
+    height: 40vh;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+.btn{
+    margin: 2px;
+    padding: 4px;
+    border: 1px solid black;
+}
