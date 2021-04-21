@@ -1,3 +1,9 @@
+<?php
+    require_once 'classe-pessoa.php';
+    $p = new Pessoa("login", "localhost", "root", "");
+?>
+
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -7,14 +13,43 @@
     <title>Cadastro</title>
 </head>
 <body>
+    <?php
+        if(isset($_POST['nome']))
+        {
+            $nome = addslashes($_POST['nome']);
+            $email = addslashes($_POST['email']);
+            $senha = addslashes(MD5($_POST['senha']));
+            $nivel = addslashes(intval($_POST['nivel']));
+            if(!empty($nome) && !empty($email) && !empty($senha) && !empty($nivel)){
+                $p->cadastrarPessoa($nome, $email, $senha, $nivel);                
+            }
+            else{
+                echo "Preencha todos os campos";
+            }
+        }
+    ?>
     
-    <form action="" method="POST">
+    <h1>CADASTRO</h1>
+
+    <form method="POST">
+
+        <label for="">Nome:</label>
+        <input type="text" name="nome"><br><br>
+
         <label for="">Email:</label>
-        <input type="text" name="email" id="senha"><br><br>
+        <input type="text" name="email"><br><br>
 
         <label for="">Senha:</label>
-        <input type="password" name="senha" id="senha">
+        <input type="password" name="senha"><br><br>
+
+        <label for="">Nivel de acesso:</label>
+        <input type="text" name="nivel"><br>
+
+        <input type="submit" value="Cadastrar" id="cadastrar" name="cadastrar">
     </form>
+
+
+
 
 </body>
 </html>
